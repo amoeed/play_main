@@ -1,0 +1,25 @@
+---
+  - name: User create via variable
+    hosts: station1
+    vars_files:
+     - vars/user.yml
+
+    vars:
+      pkg: httpd
+
+    tasks:
+
+      - name: Create user {{ user1 }}
+        user:
+          name: "{{ user1 }}"
+          home: "{{ home1 }}"
+    
+      - name: create user {{ user2 }}
+        user:
+          name: "{{ user2 }}"
+          home: "{{ home2 }}"
+
+      - name: create user {{ user3 }}
+        user:
+          name: "{{ user3 }}"
+          home: "{{ home3 }}"

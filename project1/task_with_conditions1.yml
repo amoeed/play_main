@@ -1,0 +1,11 @@
+--- 
+- name: Test Variable is Defined Demo
+  hosts: ansible-client1
+  vars:    
+    my_service: httpd
+  
+  tasks:
+  - name: "{{ my_service }} package is installed"
+    yum:        
+      name: "{{ my_service }}"
+    when: my_service is defined

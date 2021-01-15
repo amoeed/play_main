@@ -1,0 +1,11 @@
+# This Playbook for app team 
+
+- name: /etc/hosts is up to date
+  hosts: 
+         - ansible-client1
+         - ansible-client2
+  become: yes
+  
+  tasks:
+  - name: udpate /etc/hosts # this is just heading
+    shell: 'echo '192.168.2.212    tk8s-worker2' >> /etc/hosts' # this will add line in file  

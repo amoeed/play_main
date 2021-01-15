@@ -1,0 +1,13 @@
+[webserver]
+station1
+station3
+
+[appserver]
+station2
+station3
+
+[dataserver]
+station2
+station3
+
+

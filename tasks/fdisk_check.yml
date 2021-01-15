@@ -1,0 +1,4 @@
+- name: store fdisk -l {{ secondary_disk }}
+  shell: "ls -l {{ secondary_disk }}"
+  register: sdb_output
+  ignore_errors: yes

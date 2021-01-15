@@ -1,0 +1,33 @@
+---
+  - name: User setup for application servers
+    hosts: all
+    tasks:
+      - name: Create group for dba
+        group:
+          gid: 300
+          name: dba
+
+      - name: add user webesrve for app support
+        user:
+          name: appuser
+          uid: 4010
+          createhome: yes
+          home: /opt/home/appuser
+          state: present
+
+      - name: add user for oracle
+        user:
+          name: oradb
+          uid: 4011
+          groups: dba
+          shell: /bin/ksh
+          state: present
+          
+      - name: add user for oradb1
+        user:
+          name: oradb1
+          uid: 4012
+          group: dba
+          shell: /bin/ksh
+          state: present
+

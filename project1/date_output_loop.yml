@@ -1,0 +1,9 @@
+---
+- hosts: ansible-client3
+  become: yes
+  tasks:
+  - name: Pretend to create instances
+    shell: "echo `date`>> /tmp/date; sleep 5"
+    with_sequence:
+       start=1 end=6
+    

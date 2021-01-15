@@ -1,0 +1,20 @@
+---
+- name          : User Setup in Mnaged host
+  hosts         : ansible-client1
+  become        : yes
+
+  tasks         :
+  - name: gather info
+    set_fact:
+       info: "{{ ansible_facts.mounts }}"
+
+  - set_fact:
+      device_info: "{{ info|selectattr('device','match','/dev/sda1')|map(attribute='device')|list|unique|sort }}"
+
+  - debug: var=device_info 
+
+  - debug:
+      msg: "SDA disk found"
+    when:  "'/dev/sda1' in device_info"
+      
+

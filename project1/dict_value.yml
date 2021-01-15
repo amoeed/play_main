@@ -1,0 +1,12 @@
+- name: Dict Value
+  hosts: ansible-client1
+  
+  tasks:
+  - name: Print seliux mode
+    shell: "df -h"
+    when: ansible_selinux.config_mode != "Enforcing"
+
+  - fail:
+      msg: "Playbook cannot run due to selinux enable"
+    when: ansible_selinux.config_mode == "enforcing"
+      

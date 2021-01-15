@@ -1,0 +1,29 @@
+---
+- name: K8s deployment file setup
+  hosts: ansible-master
+  gather_facts: no
+
+  vars_files:
+    - ./vars/k8s_vars.yml
+  
+  tasks:
+  - name: K8s webserver deployment file
+    template:
+      src: ./template/httpd_deployment_k8s.j2
+      dest: /home/devops/deployment/{{app_name}}_deployment.yml
+ 
+  - name: create namespace {{ namespace }}
+
+    shell: kubectl create ns {{ namespace }}
+    ignore_errors: true
+
+  - name: Verify namespace is {{ namespace }}
+    shell: kubectl get ns {{ namespace }}
+    ignore_errors: true
+    register: chk_namespace
+
+
+  - name: Deploy {{ app_name }}
+    shell: kubectl apply -f /home/devops/deployment/{{app_name}}_deployment.yml
+    when: chk_namespace.rc == 0
+

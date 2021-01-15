@@ -1,0 +1,5 @@
+## This task will install package
+- name: Install {{ pkg_name }}
+  yum:
+     name: "{{ pkg_name }}"
+     state: latest

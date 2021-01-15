@@ -1,0 +1,11 @@
+
+- name: /etc/hosts is up to date
+  hosts: west_datacenter
+  become: yes
+  
+  tasks:
+  - name: udpate /etc/hosts
+    lineinfile:
+      path: /etc/hosts
+      line: '192.168.2.212    tk8s-worker2'
+      state: present

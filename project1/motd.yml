@@ -1,0 +1,14 @@
+---
+- name: Modify motd file in DB servers
+  hosts: ansible-client2
+  become: true
+
+  tasks:
+  - name: Update /etc/motd file
+    copy:
+      content: "DB Servers Managed by Ansible"
+      dest: /etc/motd
+  
+  
+  
+  

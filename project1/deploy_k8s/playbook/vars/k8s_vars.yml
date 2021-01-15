@@ -1,0 +1,5 @@
+app_name: myapp
+namespace: uat
+replica: 1
+myimage: tomcatapp:15
+port: 8080

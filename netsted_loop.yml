@@ -1,0 +1,13 @@
+---
+  - name: nested loop
+    hosts: station1
+    tasks:
+    - name: Add user into middleware group
+      user:
+        name: "{{ item[0] }}"
+        groups: "{{ item[1] }}"
+        append: yes
+
+      with_nested:
+       - [ jawaid, shamhshad, shafqat ]
+       - [ weblogic, tomcat, jboss ]

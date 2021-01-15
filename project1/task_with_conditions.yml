@@ -1,0 +1,20 @@
+--- 
+- name: Register variable with loop
+  hosts: ansible-client1 
+  gather_facts: no
+  become: yes
+   
+  tasks:
+  - name: check /var file system
+    shell: "ls -l /var/opt5"
+    register: var_check
+    ignore_errors: true
+
+ # - debug: var=var_check
+
+  - name: Install httpd 
+    yum:
+       name: httpd
+       state: latest
+    when: var_check.rc == 0
+     

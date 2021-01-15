@@ -1,0 +1,18 @@
+---
+  - name: Add users into multiple group
+    hosts: station1
+    tasks:
+    - name: Add groups for Shafqat Fareed
+      user:
+        name: sfareed
+        groups: dba,weblogic,tomcat
+
+   - name: Add groups for Jawaid Farid
+     user:
+       name: jfarid
+       groups: dba,weblogic,tomcat
+       
+   - name: Add groups for shamshad
+     user:
+       name: shamshad
+       groups: dba,weblogic,tomcat

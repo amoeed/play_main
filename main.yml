@@ -1,0 +1,7 @@
+---
+  - name: register example
+    hosts: station1
+    tasks:
+      - include_vars: vars/disk.yml
+      - include: tasks/fdisk_check.yml
+      - include: tasks/update_vg.yml

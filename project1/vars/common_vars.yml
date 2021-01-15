@@ -1,0 +1,7 @@
+service_status: started
+user_data:
+      - { user_name: 'fkarim',  user_id: '10020' }
+      - { user_name: 'ikhan',   user_id: '10021' }
+      - { user_name: 'ijaseem', user_id: '10022' }
+      - { user_name: 'sfareed', user_id: '10023' }
+

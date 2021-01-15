@@ -1,0 +1,15 @@
+---
+- name          : User Setup in Mnaged host
+  hosts         : webservers
+                
+
+  become        : yes
+
+  tasks         :
+  - name        : Create user - {{ user_name }}
+    user        :
+      name      : "{{ user_name }}"
+      uid       : "{{ user_id }}"
+      comment   : 'User name - {{ user_fullname }}'
+      state     : "{{ user_state }}"
+  

@@ -1,0 +1,13 @@
+---
+- name: Add line in motd file
+  hosts: ansible-client1
+  become: true
+
+  tasks:
+  - name: Add a line of text to a file
+    lineinfile:
+      path: /etc/motd
+      regexp: '^tcp port 22' 
+      line: "#tcp port 22"
+      state: present
+

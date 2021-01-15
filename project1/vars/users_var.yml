@@ -1,0 +1,4 @@
+   user_name: myappuser
+   user_id:  4014
+   user_fullname: "Application user"
+   user_state: present

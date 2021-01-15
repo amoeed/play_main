@@ -1,0 +1,19 @@
+--- 
+- name: Register variable with loop
+  hosts: ansible-client1 
+  gather_facts: no
+   
+  tasks:
+  - name: Display list of items
+    shell: "echo This is my list of items:  {{ item }}"
+    loop : [one, two, three]
+    register: echo_output
+
+ # - debug: var=echo_output
+
+  - name: Dispaly output line from register variable
+    debug:
+      msg: "{{ item.stdout }}"
+    loop: "{{ echo_output['results'] }}"
+    loop_control:
+        label: "{{ item.item }}"

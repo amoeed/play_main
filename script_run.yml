@@ -1,0 +1,6 @@
+---
+  - name: run script
+    hosts: station2
+    tasks:
+    - name: run script on remote server
+      script: /home/ansible/amoeed/plays/useradd.sh

@@ -1,0 +1,19 @@
+---
+  - name: check services
+    hosts: station1
+    tasks:
+    - name: SSH and Postfix are running
+      service:
+        name: "{{ item }}"
+        state: started
+
+      with_items:
+       - sshd
+       - postfix
+       - httpd
+  
+    - include_vars: vars/disk.yml
+    - include: tasks/fdisk_check.yml
+    - include: tasks/update_vg.yml
+   
+

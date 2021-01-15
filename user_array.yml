@@ -1,0 +1,37 @@
+---
+  - name: Variable in array
+    hosts: station2
+    #gather_facts: no
+    vars:
+      user:
+        shafqat:
+          user_id: sfareed
+          first_name: Shafaq
+          last_name: Fareed
+          home_dir: /home/shafaq
+        jawaid:
+          user_id: jfarid
+          first_name: Jawaid
+          last_name: Farid
+          home_dir: /home/jawaid
+        shamshad:
+          first_name: Shahmshad
+          last_name: Ahmed
+          home_dir: /home/shamshad
+
+    tasks:
+    - name: First name of user {{ user.jawaid.first_name }}
+      user:
+        user: "{{ user.jawaid.user_id }}" 
+        home: "{{ user.jawaid.home_dir }}"
+      register: user_output   
+
+    - name: output of user {{ user.jawaid.user_id }}
+      debug: 
+        msg={{ user_output }}
+
+
+    - name: server IP address
+      debug:
+        msg='The default IPv4 address {{ ansible_fqdn }} is {{ ansible_default_ipv4.address }}'
+        

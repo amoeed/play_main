@@ -1,0 +1,17 @@
+---
+- name: Setup package on Linux Server
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Import Package Install task
+    import_tasks: package_task_install.yml
+    vars:
+       pkg_name: nfs-utils
+           
+ # - name: Service start for installed package
+ #   import_tasks: service_start.yml
+  
+
+  
+

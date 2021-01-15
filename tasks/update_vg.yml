@@ -1,0 +1,3 @@
+- name: if found {{ secondary_disk }}, add into vg
+  shell: "vgextend -g datavg {{ secondary_disk }}"
+  when:  sdb_output.rc == 0 

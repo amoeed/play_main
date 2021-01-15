@@ -1,0 +1,11 @@
+---
+- hosts: ansible-client1
+  gather_facts: no
+
+  tasks:
+  - name: Run uptime command
+    shell: "uptime"
+    register: uptime_output
+    changed_when: false
+  
+  

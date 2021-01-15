@@ -1,0 +1,13 @@
+---
+- name: File create and set permission
+  hosts: ansible-client1
+  become: true
+
+  tasks:
+  - name: Touch a file and set permissions  
+    file:
+      path: /opt/testfile
+      owner: devops
+      group: devops
+      mode: 0755
+      state: absent

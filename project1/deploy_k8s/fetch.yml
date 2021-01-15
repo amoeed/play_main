@@ -1,0 +1,11 @@
+---
+- name: Fetch config files
+  hosts: webservers
+  become: yes
+  
+  tasks:
+  - name: Fetch sshd config file from Managed host
+    fetch:
+      src: /etc/ssh/sshd_config
+      dest: ./output/
+     

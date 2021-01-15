@@ -1,0 +1,32 @@
+- name: File system check
+  hosts: ansible-client1
+    
+  tasks:
+  - name: calculate disk space 
+    set_fact:
+      fs_list: "{{ fs_list | default ([]) + [ { 'mount_point': item.mount , 'size': (item.size_available  / 1024 / 1024) | int } ] }}"
+    register: disk_out
+    loop: "{{ ansible_facts.mounts }}"
+    when: item.mount in ['/', '/boot', '/usr', '/tmp', '/var', '/var/cache/yum', '/local']
+    failed_when: false
+  
+  - name: Verify if file system below threshold 
+    set_fact:
+       fs_notOK: "{{ fs_notOK | default ([]) + [ { 'mount': item.mount_point , 'size': item.size } ] }}"
+    loop: "{{ fs_list }}"
+    when: > 
+            (item.mount_point == '/' and item.size < 1024 | int)            or
+            (item.mount_point == '/boot' and item.size < 256 | int)          or
+            (item.mount_point == '/usr' and item.size < 512 | int)           or
+            (item.mount_point == '/tmp' and item.size < 128 | int)           or
+            (item.mount_point == '/var' and item.size < 256 | int)           or
+            (item.mount_point == '/ar/cache/yum' and item.size < 3072 | int) or
+            (item.mount_point == '/local' and item.size < 5120 | int) 
+
+  - name: Display file system and free space  
+    debug:
+      msg: "File system size below threshold :  {{ item.mount }} ==> {{ item.size }} MB"
+    loop: "{{ fs_notOK }}"
+    loop_control:
+      label: "{{ item.mount }}"
+    when: fs_notOK is defined

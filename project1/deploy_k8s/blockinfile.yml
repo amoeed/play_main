@@ -1,0 +1,14 @@
+---
+- name: Add block in file
+  hosts: ansible-client1
+  become: yes
+  
+  tasks:
+  - name: add content in file as block
+    blockinfile:
+      path: /etc/motd   
+      block: |      
+        sshd listen : 922
+        timtout 30
+      marker: "# {mark} SSHD setting"
+      create: yes

@@ -1,0 +1,17 @@
+--- 
+- hosts: all 
+  gather_facts: no
+
+  vars:
+    - vars/array_user.yml
+    
+  tasks:
+  - debug:
+    msg: "{{ users.xyz.address  + ' ' + users.xyz.country }}"
+  
+  - name: Prints Majic veriable output
+    debug:      
+      msg: >
+          Ansible hostname is {{ inventory_hostname }}
+
+

@@ -1,0 +1,21 @@
+---
+
+  - name: Install Apache web server
+    hosts: '{ webserver }'
+    tasks:
+      - name: Install httpd
+        yum:
+          name: httpd
+          state: present
+      
+      - name: Start httpd service
+        systemd:
+          name: httpd
+          enabled: yes
+          state: started 
+
+      - name: Copy index.html file on apache web servers
+        copy:
+          src: /home/ansible/config/index.html 
+          dest: /var/www/html/index.html
+          backup: yes

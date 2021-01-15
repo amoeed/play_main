@@ -1,0 +1,16 @@
+---
+
+  # loop module replace For loop
+
+  - name: Create file system in datavg 
+    hosts: localhost
+    tasks:
+    - name: lvs list
+      shell: "lvs |grep datavg |awk '{print $1}'"
+      register: lvs_list
+
+    - name: create file system
+      shell: "mkfs.ext4 /dev/datavg/{{ item }}"
+      with_items: "{{ lvs_list.stdout_lines }}"
+         
+    

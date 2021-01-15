@@ -1,0 +1,19 @@
+---
+  - name: User create via variable
+    hosts: station1
+    vars:
+      user1_name: testuser1
+      user1_home: /home/testuser1
+      user2_name: testuser2
+      user2_home: /home/testuser2
+
+    tasks:
+    - name: Create user {{ user1_name }}
+      user:
+        name: "{{ user1_name }}"
+        home: "{{ user1_home }}"
+    
+    - name: create user {{ user2_name }}
+      user:
+        name: "{{ user2_name }}"
+        home: "{{ user2_home }}"
